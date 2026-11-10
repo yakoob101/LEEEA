@@ -1,0 +1,1344 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday, Leea! 💖 My Everything</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              obsidian: "#070609",
+              darkcharcoal: "#0f0e13",
+              cardbg: "#16141d",
+              cardhover: "#1e1a29",
+              borderpink: "#2d1b2f",
+              neonpink: "#ec4899",
+              softpink: "#f472b6",
+              blushrose: "#fb7185",
+              palepink: "#fbcfe8",
+            },
+            fontFamily: {
+              heading: ['"Poppins"', "sans-serif"],
+              body: ['"Inter"', "sans-serif"],
+            },
+            animation: {
+              float: "float 6s ease-in-out infinite",
+              "pulse-glow": "pulseGlow 3s ease-in-out infinite",
+              shake: "shake 0.5s ease-in-out",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+              pulseGlow: {
+                "0%, 100%": { boxShadow: "0 0 20px rgba(236, 72, 153, 0.2)" },
+                "50%": { boxShadow: "0 0 35px rgba(236, 72, 153, 0.5)" },
+              },
+              shake: {
+                "0%, 100%": { transform: "translateX(0)" },
+                "20%, 60%": { transform: "translateX(-6px) rotate(-2deg)" },
+                "40%, 80%": { transform: "translateX(6px) rotate(2deg)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Google Fonts — clean & readable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #070609;
+        color: #f3f4f6;
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Poppins", sans-serif;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #070609;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2d1b2f;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #ec4899;
+      }
+      .glass-panel {
+        background: rgba(14, 12, 19, 0.4);
+        backdrop-filter: blur(2px);
+        border: 1px solid rgba(236, 72, 153, 0.2);
+      }
+      .glow-pink {
+        box-shadow: 0 0 30px rgba(236, 72, 153, 0.25);
+      }
+      .text-glow {
+        text-shadow: 0 0 30px rgba(244, 114, 182, 0.4);
+      }
+    </style>
+  </head>
+  <body
+    class="relative min-h-screen selection:bg-pink-500 selection:text-white"
+  >
+    <!-- Canvas Background for Tulips -->
+    <canvas
+      id="bgCanvas"
+      class="fixed inset-0 pointer-events-none z-0"
+    ></canvas>
+    <!-- Canvas for Cursor Sparkles -->
+    <canvas
+      id="cursorCanvas"
+      class="fixed inset-0 pointer-events-none z-50"
+    ></canvas>
+
+    <!-- Navigation Bar -->
+    <header
+      class="fixed top-0 left-0 right-0 z-40 glass-panel border-b border-pink-500/10 transition-all duration-300"
+    >
+      <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between"
+      >
+        <a href="#" class="flex items-center gap-2 group">
+          <span
+            class="w-9 h-9 rounded-full bg-gradient-to-tr from-pink-600 to-rose-400 flex items-center justify-center text-white shadow-lg shadow-pink-500/30 group-hover:scale-105 transition-transform"
+          >
+            <i class="fa-solid fa-heart text-sm animate-pulse"></i>
+          </span>
+          <span
+            class="font-heading text-xl font-bold bg-gradient-to-r from-pink-400 via-rose-300 to-pink-500 bg-clip-text text-transparent"
+            >Leea & Yakoob lol</span
+          >
+        </a>
+
+        <nav
+          class="hidden md:flex items-center gap-6 text-sm font-medium text-pink-200/80"
+        >
+          <a href="#hero" class="hover:text-pink-400 transition-colors">Home</a>
+          <a href="#jar-section" class="hover:text-pink-400 transition-colors"
+            >100 Reasons</a
+          >
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <button
+            id="musicToggleBtn"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-xs font-medium hover:bg-pink-500/20 transition-all cursor-pointer"
+          >
+            <i class="fa-solid fa-music animate-bounce"></i>
+            <span id="musicBtnText">Play</span>
+          </button>
+          <button
+            id="mobileMenuBtn"
+            class="md:hidden text-pink-300 p-2 focus:outline-none"
+          >
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Dropdown Menu -->
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden glass-panel border-t border-pink-500/10 px-6 py-4 flex flex-col gap-3 text-pink-200"
+      >
+        <a href="#hero" class="mobile-link hover:text-pink-400">Home</a>
+        <a href="#jar-section" class="mobile-link hover:text-pink-400"
+          >100 Reasons</a
+        >
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="relative z-10 pt-20">
+      <!-- ======================== HERO ======================== -->
+      <section
+        id="hero"
+        class="min-h-[90vh] flex flex-col items-center justify-center text-center px-4 py-16 relative"
+      >
+        <!-- Decorative Glow Orbs -->
+        <div
+          class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 sm:w-96 sm:h-96 bg-pink-600/15 rounded-full blur-[100px] pointer-events-none"
+        ></div>
+        <div
+          class="absolute bottom-10 left-10 w-60 h-60 bg-rose-500/10 rounded-full blur-[80px] pointer-events-none"
+        ></div>
+
+        <div
+          class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-pink-500/30 text-pink-300 text-xs sm:text-sm font-medium mb-6 animate-float"
+        >
+          <i class="fa-solid fa-crown text-amber-400"></i>
+          <span>Happy Birthday to the Queen of My Heart</span>
+          <i class="fa-solid fa-sparkles text-pink-400"></i>
+        </div>
+
+        <h1
+          class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tight text-white text-glow mb-6 leading-[0.95]"
+        >
+          Happy Birthday, <br class="sm:hidden" />
+          <span
+            class="bg-gradient-to-r from-pink-400 via-rose-300 to-pink-500 bg-clip-text text-transparent"
+            >Leea!</span
+          >
+        </h1>
+
+        <p
+          class="text-2xl sm:text-3xl md:text-4xl font-semibold text-pink-200/90 mb-6"
+        >
+          My Everything 💖
+        </p>
+
+        <p
+          class="max-w-xl text-sm sm:text-base text-gray-300/90 leading-relaxed mb-10 px-4"
+        >
+          To my girl with the absolute most swag, the prettiest smile, the best
+          music taste, and being the loml. Today is all about celebrating YOU
+          and how much u mean to me bby.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="#jar-section"
+            class="px-8 py-3.5 rounded-full bg-gradient-to-r from-pink-600 via-rose-500 to-pink-500 text-white font-semibold text-sm sm:text-base shadow-lg shadow-pink-500/30 hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
+          >
+            <i class="fa-solid fa-jar text-lg"></i>
+            <span>Open 100 Reasons Jar</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============= INTERACTIVE MEMORY JAR (100 Reasons) ============= -->
+      <section id="jar-section" class="py-20 px-4 max-w-5xl mx-auto relative">
+        <div class="text-center mb-12">
+          <span
+            class="text-pink-400 text-xs uppercase tracking-widest font-semibold block mb-2"
+            >Interactive LUV Jar</span
+          >
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-white mb-4">
+            100 Reasons Why I Love You, Leea!
+          </h2>
+          <!-- Progress Tracker -->
+          <div
+            class="mt-6 inline-flex items-center gap-3 px-5 py-2 rounded-full glass-panel border border-pink-500/20"
+          >
+            <i class="fa-solid fa-heart text-pink-500 animate-pulse"></i>
+            <span class="text-sm text-pink-200"
+              >Unlocked:
+              <strong id="unlockedCount" class="text-white">0</strong> / 100
+              Reasons</span
+            >
+          </div>
+        </div>
+
+        <!-- Jar & Card Container -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          <!-- Left: Interactive Jar -->
+          <div class="md:col-span-5 flex flex-col items-center justify-center">
+            <div
+              id="jarContainer"
+              class="relative group cursor-pointer p-6 transition-transform duration-300 hover:scale-105"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-tr from-pink-600/30 to-rose-400/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all"
+              ></div>
+
+              <div
+                class="relative z-10 w-64 h-80 glass-panel rounded-b-[4rem] rounded-t-3xl border-2 border-pink-500/40 flex flex-col items-center justify-between p-6 shadow-2xl overflow-hidden"
+              >
+                <!-- Cork -->
+                <div
+                  class="w-32 h-8 bg-gradient-to-r from-amber-800 to-amber-700 rounded-lg border border-amber-600 shadow-md -mt-6 z-20 flex items-center justify-center"
+                >
+                  <span
+                    class="text-[10px] text-amber-200 tracking-wider font-bold"
+                    >LEEA'S JAR</span
+                  >
+                </div>
+
+                <!-- Floating hearts -->
+                <div
+                  class="absolute inset-0 flex flex-wrap items-end justify-center gap-3 p-6 opacity-80 pointer-events-none overflow-hidden"
+                >
+                  <i
+                    class="fa-solid fa-heart text-pink-500 text-xl animate-float"
+                    style="animation-delay: 0s"
+                  ></i>
+                  <i
+                    class="fa-solid fa-star text-rose-400 text-lg animate-float"
+                    style="animation-delay: 1s"
+                  ></i>
+                  <i
+                    class="fa-solid fa-heart text-rose-400 text-2xl animate-float"
+                    style="animation-delay: 0.5s"
+                  ></i>
+                  <i
+                    class="fa-solid fa-sparkles text-pink-300 text-lg animate-float"
+                    style="animation-delay: 1.5s"
+                  ></i>
+                  <i
+                    class="fa-solid fa-heart text-pink-400 text-3xl animate-float"
+                    style="animation-delay: 0.8s"
+                  ></i>
+                </div>
+
+                <!-- Jar Label -->
+                <div
+                  class="relative z-10 bg-black/60 backdrop-blur-md px-4 py-3 rounded-2xl border border-pink-500/30 text-center w-full shadow-inner mb-2"
+                >
+                  <span class="text-lg font-semibold text-pink-300 block"
+                    >100 Reasons</span
+                  >
+                  <span class="text-[11px] text-gray-300 font-medium"
+                    >Click to Draw Card 💖</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="mt-6 flex flex-wrap gap-2 sm:gap-3 justify-center items-center"
+            >
+              <button
+                id="backReasonBtn"
+                class="px-4 py-3 rounded-full glass-panel border border-pink-500/30 text-pink-200 font-semibold text-sm hover:bg-pink-500/10 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+                title="Previous Reason"
+                disabled
+              >
+                <i class="fa-solid fa-arrow-left sm:mr-1.5"></i>
+                <span class="hidden sm:inline">Previous</span>
+              </button>
+              <button
+                id="drawReasonBtn"
+                class="px-6 py-3 rounded-full bg-gradient-to-r from-pink-600 to-rose-500 text-white font-semibold text-sm shadow-lg shadow-pink-500/30 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
+              >
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>Draw a Reason</span>
+              </button>
+              <button
+                id="nextReasonBtn"
+                class="px-4 py-3 rounded-full glass-panel border border-pink-500/30 text-pink-200 font-semibold text-sm hover:bg-pink-500/10 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed hidden"
+                title="Next Reason"
+              >
+                <span class="hidden sm:inline">Next</span>
+                <i class="fa-solid fa-arrow-right sm:ml-1.5"></i>
+              </button>
+              <button
+                id="viewAllBtn"
+                class="px-5 py-3 rounded-full glass-panel border border-pink-500/30 text-pink-200 font-semibold text-sm hover:bg-pink-500/10 transition-all cursor-pointer"
+              >
+                <i class="fa-solid fa-list mr-1.5"></i>
+                <span>View Unlocked</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Active Reason Card -->
+          <div class="md:col-span-7">
+            <div
+              id="reasonCardDisplay"
+              class="glass-panel p-8 sm:p-10 rounded-3xl border-2 border-pink-500/30 glow-pink relative min-h-[320px] flex flex-col justify-between transition-all duration-500"
+            >
+              <!-- Top Tag -->
+              <div class="flex items-center justify-between mb-6">
+                <span
+                  id="reasonNumberBadge"
+                  class="px-3 py-1 rounded-full bg-pink-500/20 border border-pink-500/40 text-pink-300 text-xs font-semibold"
+                >
+                  Reason #1 of 100
+                </span>
+                <div class="flex items-center gap-2">
+                  <button
+                    id="favoriteReasonBtn"
+                    class="w-9 h-9 rounded-full bg-black/40 border border-pink-500/30 text-pink-300 flex items-center justify-center hover:bg-pink-500/20 transition-all cursor-pointer"
+                    title="Favorite"
+                  >
+                    <i class="fa-regular fa-heart"></i>
+                  </button>
+                  <button
+                    id="copyReasonBtn"
+                    class="w-9 h-9 rounded-full bg-black/40 border border-pink-500/30 text-pink-300 flex items-center justify-center hover:bg-pink-500/20 transition-all cursor-pointer"
+                    title="Copy Reason"
+                  >
+                    <i class="fa-regular fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Card Content -->
+              <div class="my-auto py-4 text-center">
+                <i
+                  class="fa-solid fa-quote-left text-pink-500/40 text-3xl mb-3 block"
+                ></i>
+                <h3
+                  id="reasonText"
+                  class="text-2xl sm:text-3xl md:text-4xl text-pink-100 font-bold leading-relaxed"
+                >
+                  Click the jar to draw your first reason, Leea! 💖
+                </h3>
+                <i
+                  class="fa-solid fa-quote-right text-pink-500/40 text-3xl mt-3 inline-block"
+                ></i>
+              </div>
+
+              <!-- Card Footer -->
+              <div
+                class="pt-6 border-t border-pink-500/10 flex items-center justify-between text-xs text-gray-400"
+              >
+                <span>I LOVE U SO SO MUCH! 💖</span>
+                <span class="text-pink-400 font-medium"
+                  >✨ Tap jar for another</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer
+        class="py-12 px-4 border-t border-pink-500/10 text-center relative z-10 bg-obsidian"
+      >
+        <div class="max-w-4xl mx-auto flex flex-col items-center gap-4">
+          <div class="flex items-center gap-2">
+            <span
+              class="w-8 h-8 rounded-full bg-gradient-to-tr from-pink-600 to-rose-400 flex items-center justify-center text-white shadow-lg"
+            >
+              <i class="fa-solid fa-heart text-xs"></i>
+            </span>
+            <span class="text-xl font-bold text-pink-300"
+              >MY BABYS BIRTHDAYYYY</span
+            >
+          </div>
+          <p class="text-xs text-gray-400 max-w-md">Happy Birthday, Leea! 💖</p>
+          <div class="text-[11px] text-pink-400/80 font-medium">
+            "Ur my everything Leea" ✨
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Modal: View All 100 Reasons -->
+    <div
+      id="allReasonsModal"
+      class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="glass-panel w-full max-w-3xl max-h-[85vh] rounded-3xl border border-pink-500/30 flex flex-col overflow-hidden shadow-2xl"
+      >
+        <div
+          class="p-6 border-b border-pink-500/20 flex items-center justify-between bg-black/40"
+        >
+          <div>
+            <h3 class="text-2xl text-white font-bold">Unlocked Reasons</h3>
+            <p class="text-xs text-pink-300">
+              Reasons you've discovered so far
+            </p>
+          </div>
+          <button
+            id="closeModalBtn"
+            class="w-10 h-10 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 flex items-center justify-center hover:bg-pink-500/25 transition-all cursor-pointer"
+          >
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+        <div id="allReasonsList" class="p-6 overflow-y-auto space-y-3">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Audio / Music Player Widget with Playlist -->
+    <div
+      id="musicPlayerWidget"
+      class="fixed bottom-6 right-6 z-40 glass-panel px-4 py-2.5 rounded-2xl border border-pink-500/30 shadow-2xl flex flex-col gap-1.5 backdrop-blur-xl max-w-xs sm:max-w-sm select-none cursor-grab active:cursor-grabbing"
+      style="touch-action: none"
+    >
+      <!-- Subtle Drag Handle -->
+      <div
+        class="flex items-center justify-center -mt-0.5 pb-0.5"
+        title="Drag to move"
+      >
+        <div
+          class="w-8 h-1 rounded-full bg-pink-400/30 hover:bg-pink-400/60 transition-colors"
+        ></div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div
+          id="discSpinner"
+          class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-600 to-rose-400 flex items-center justify-center text-white shadow-lg shrink-0"
+          style="
+            animation: spin 8s linear infinite paused;
+            animation-name: spin;
+          "
+        >
+          <i class="fa-solid fa-compact-disc text-sm"></i>
+        </div>
+        <div class="overflow-hidden min-w-[120px] flex-1">
+          <span
+            class="block text-[10px] uppercase tracking-wider text-pink-400 font-bold"
+            >Now Playing</span
+          >
+          <span
+            id="currentSongTitle"
+            class="block text-xs font-semibold text-white truncate"
+            >Select a song 🎵</span
+          >
+        </div>
+        <div class="flex items-center gap-1.5 shrink-0 ml-1">
+          <button
+            id="prevSongBtn"
+            class="w-7 h-7 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-200 flex items-center justify-center hover:bg-pink-500/30 transition-all cursor-pointer"
+            title="Previous Song"
+          >
+            <i class="fa-solid fa-backward-step text-[10px]"></i>
+          </button>
+          <button
+            id="floatingPlayBtn"
+            class="w-8 h-8 rounded-full bg-pink-500/25 border border-pink-500/40 text-white flex items-center justify-center hover:bg-pink-500/40 transition-all cursor-pointer"
+            title="Play / Pause"
+          >
+            <i class="fa-solid fa-play text-xs" id="playIcon"></i>
+          </button>
+          <button
+            id="nextSongBtn"
+            class="w-7 h-7 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-200 flex items-center justify-center hover:bg-pink-500/30 transition-all cursor-pointer"
+            title="Next Song"
+          >
+            <i class="fa-solid fa-forward-step text-[10px]"></i>
+          </button>
+          <button
+            id="playlistBtn"
+            class="w-7 h-7 rounded-full bg-pink-500/20 border border-pink-500/40 text-pink-300 flex items-center justify-center hover:bg-pink-500/30 transition-all cursor-pointer ml-1"
+            title="Playlist"
+          >
+            <i class="fa-solid fa-list-music text-[10px]"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Volume Slider Row -->
+      <div
+        class="flex items-center gap-2 pt-1.5 border-t border-pink-500/15 px-1"
+      >
+        <i
+          id="volumeIcon"
+          class="fa-solid fa-volume-high text-[11px] text-pink-300/80 w-3.5"
+        ></i>
+        <input
+          type="range"
+          id="volumeSlider"
+          min="0"
+          max="1"
+          step="0.01"
+          value="0.8"
+          class="w-full h-1.5 accent-pink-500 cursor-pointer bg-pink-950/40 rounded-lg appearance-none"
+          title="Volume"
+        />
+      </div>
+    </div>
+
+    <!-- Modal: Playlist Songs -->
+    <div
+      id="playlistModal"
+      class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="glass-panel w-full max-w-lg max-h-[85vh] rounded-3xl border border-pink-500/30 flex flex-col overflow-hidden shadow-2xl"
+      >
+        <div
+          class="p-6 border-b border-pink-500/20 flex items-center justify-between bg-black/40"
+        >
+          <div>
+            <h3 class="text-2xl text-white font-bold font-heading">
+              Lee's Music Playlist 🎧
+            </h3>
+            <p class="text-xs text-pink-300">18 special songs just for you</p>
+          </div>
+          <button
+            id="closePlaylistBtn"
+            class="w-10 h-10 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 flex items-center justify-center hover:bg-pink-500/25 transition-all cursor-pointer"
+          >
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+        <div id="playlistList" class="p-6 overflow-y-auto space-y-2">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </div>
+
+    <style>
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      #discSpinner.spinning {
+        animation-play-state: running;
+      }
+    </style>
+
+    <audio id="bgAudio"></audio>
+
+    <!-- JavaScript -->
+    <script>
+      // --- 100 Reasons Array ---
+      const reasons = [
+        "You got so much SWAGG",
+        "Leea is the Goat",
+        "Ur my wife",
+        "U smell good ;)",
+        "Ur so smexyy",
+        "Ur eyes are pretty",
+        "Ur not broke",
+        "Ur not gay (yet)",
+        "U complete me",
+        "U make me happy",
+        "I love our deep convos",
+        "I love our freaky convos hehe",
+        "U have a nice family",
+        "U give me a reason to live",
+        "ur the perfect height",
+        "U look good in everything",
+        "I love how bootiful u are",
+        "U got da moves like Jagger",
+        "Ur an awesome mother",
+        "Ur a greatfriend",
+        "I love ur smile",
+        "Ur laugh adorable",
+        "I love ur voice and the accents u do",
+        "i love how ahh u are at robloc",
+        "Ur the perfect girlfriend and bestfriend",
+        "I love that we learn from each other",
+        "i love the way we're comfortable together",
+        "we Look great together",
+        "That ur a very caring person",
+        "That u can bake and cook #wifeDat",
+        "That u have W music taste",
+        "I love that u love me",
+        "I love eating with u",
+        "i love sharing food with u",
+        "I love all ur delicious Food!",
+        "I love that u entertain my nonsense",
+        "i love that ur transparent and respect me",
+        "I love that ur not evil or controlling",
+        "I love that u support and encourage me",
+        "i love that u flirt back",
+        "UR SO FUNNYY",
+        "Ur face is so pretty",
+        "U got that hourglass body fr",
+        "U appreciate the things other do",
+        "U always say u love me back",
+        "I love that u stay up to talk to me",
+        "I love that i can call u my girlfriend",
+        "I love that u call me boyfriend",
+        "I love that u find me attractive",
+        "I love ur awesome personality",
+        "I love ur cats",
+        "I love our facetime calls",
+        "I love when we play games together",
+        "I love when we hangout",
+        "I love ur indecisiveness",
+        "I love that u make me feel better when im sad",
+        "I love that we r overcome pain together",
+        "i love how easy it is to talk to u",
+        "i love that we make our distance work",
+        "i love that u wait for me",
+        "i love that we dream about each other",
+        "i love how u remember so much",
+        "i love how smart u are",
+        "i love that u genuinely try",
+        "I love ur slang and NYAAA",
+        "i love watching movie online with u",
+        "i love falling asleep on call",
+        "i love ur beautiful name",
+        "i love the cute pics we take together",
+        "i love that we are the same person",
+        "i love our hate for beans and anything with bones",
+        "i love ur SINGING!",
+        "i love ur hair (especially when its curly)",
+        "i love that ur comfortable talking to me",
+        "i love that ur a strong independent woman",
+        "i love that u get jealous",
+        "i love that u let me into your life",
+        "U got hella rizz",
+        "That u slid into my DMs",
+        "i love that u got no hoes in ur dms (#loser)",
+        "I love that u said yes when i asked u to be my Valentines",
+        "I love that u accept my mistakes and help me become better",
+        "i love that u admit to ur shortcomings and accept help",
+        "i love how u let me pay sometimes",
+        "i love that u remind me of Allah",
+        "i love that i can boast about u to my friends",
+        "i love that u find me cool",
+        "Ur sister approves of me",
+        "i love that we have the coolest mutual friends (shoutout LAYLA)",
+        "I love that u listen",
+        "I love ur hugs",
+        "i love how u light up when u see me",
+        "i love how shy u are sometimes",
+        "i love that u trying to grow everyday",
+        "i love the reels and nonsense u send me",
+        "how good u are with ur cool makeup",
+        "i love that i can barely notice ur makeup sometimes",
+        "i love that u check up on me",
+        "i love how close we have gotten",
+        "ur my everything Leea",
+      ];
+
+      // State tracking
+      let unlockedReasons = new Set();
+      let history = [];
+      let currentHistoryIndex = -1;
+      let unseenReasons = Array.from({ length: reasons.length }, (_, i) => i);
+      let favoriteReasons = new Set();
+
+      // Shuffle unseen reasons initially (Fisher-Yates)
+      for (let i = unseenReasons.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [unseenReasons[i], unseenReasons[j]] = [
+          unseenReasons[j],
+          unseenReasons[i],
+        ];
+      }
+
+      // --- Confetti Effect ---
+      function triggerConfetti() {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ["#ec4899", "#f43f5e", "#fbcfe8", "#fb7185"],
+        });
+      }
+
+      // --- Memory Jar Logic ---
+      const jarContainer = document.getElementById("jarContainer");
+      const drawReasonBtn = document.getElementById("drawReasonBtn");
+      const backReasonBtn = document.getElementById("backReasonBtn");
+      const nextReasonBtn = document.getElementById("nextReasonBtn");
+      const reasonText = document.getElementById("reasonText");
+      const reasonNumberBadge = document.getElementById("reasonNumberBadge");
+      const unlockedCount = document.getElementById("unlockedCount");
+      const reasonCardDisplay = document.getElementById("reasonCardDisplay");
+      const copyReasonBtn = document.getElementById("copyReasonBtn");
+      const favoriteReasonBtn = document.getElementById("favoriteReasonBtn");
+
+      function updateNavButtons() {
+        if (backReasonBtn) {
+          backReasonBtn.disabled = currentHistoryIndex <= 0;
+        }
+        if (nextReasonBtn) {
+          if (
+            currentHistoryIndex >= 0 &&
+            currentHistoryIndex < history.length - 1
+          ) {
+            nextReasonBtn.classList.remove("hidden");
+          } else {
+            nextReasonBtn.classList.add("hidden");
+          }
+        }
+      }
+
+      function updateReasonCard(index) {
+        const text = reasons[index];
+        reasonText.textContent = text;
+        reasonNumberBadge.textContent = `Reason #${index + 1} of 100`;
+
+        const isFav = favoriteReasons.has(index);
+        favoriteReasonBtn.innerHTML = isFav
+          ? '<i class="fa-solid fa-heart text-pink-500"></i>'
+          : '<i class="fa-regular fa-heart"></i>';
+        favoriteReasonBtn.classList.toggle("bg-pink-500/20", isFav);
+
+        updateNavButtons();
+
+        // Animate card swap
+        reasonCardDisplay.style.transform = "scale(0.97)";
+        setTimeout(() => {
+          reasonCardDisplay.style.transform = "scale(1)";
+        }, 150);
+      }
+
+      function drawNewReason() {
+        // Shake jar
+        jarContainer.classList.add("animate-shake");
+        setTimeout(() => jarContainer.classList.remove("animate-shake"), 500);
+
+        // When all 100 reasons have been seen, replenish & reshuffle for next round
+        if (unseenReasons.length === 0) {
+          unseenReasons = Array.from({ length: reasons.length }, (_, i) => i);
+          for (let i = unseenReasons.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [unseenReasons[i], unseenReasons[j]] = [
+              unseenReasons[j],
+              unseenReasons[i],
+            ];
+          }
+        }
+
+        const nextReasonIndex = unseenReasons.pop();
+        history.push(nextReasonIndex);
+        currentHistoryIndex = history.length - 1;
+
+        unlockedReasons.add(nextReasonIndex);
+        unlockedCount.textContent = unlockedReasons.size;
+
+        updateReasonCard(nextReasonIndex);
+        triggerConfetti();
+      }
+
+      function goBack() {
+        if (currentHistoryIndex > 0) {
+          currentHistoryIndex--;
+          updateReasonCard(history[currentHistoryIndex]);
+        }
+      }
+
+      function goNext() {
+        if (currentHistoryIndex < history.length - 1) {
+          currentHistoryIndex++;
+          updateReasonCard(history[currentHistoryIndex]);
+        }
+      }
+
+      jarContainer.addEventListener("click", drawNewReason);
+      drawReasonBtn.addEventListener("click", drawNewReason);
+      if (backReasonBtn) backReasonBtn.addEventListener("click", goBack);
+      if (nextReasonBtn) nextReasonBtn.addEventListener("click", goNext);
+
+      // Copy reason
+      copyReasonBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(reasonText.textContent);
+        copyReasonBtn.innerHTML =
+          '<i class="fa-solid fa-check text-green-400"></i>';
+        setTimeout(() => {
+          copyReasonBtn.innerHTML = '<i class="fa-regular fa-copy"></i>';
+        }, 1500);
+      });
+
+      // Favorite toggle
+      favoriteReasonBtn.addEventListener("click", () => {
+        if (currentHistoryIndex < 0) return;
+        const currentIdx = history[currentHistoryIndex];
+        if (favoriteReasons.has(currentIdx)) {
+          favoriteReasons.delete(currentIdx);
+        } else {
+          favoriteReasons.add(currentIdx);
+        }
+        const isFav = favoriteReasons.has(currentIdx);
+        favoriteReasonBtn.innerHTML = isFav
+          ? '<i class="fa-solid fa-heart text-pink-500"></i>'
+          : '<i class="fa-regular fa-heart"></i>';
+        favoriteReasonBtn.classList.toggle("bg-pink-500/20", isFav);
+      });
+
+      // --- View All Modal (Only shows unlocked reasons) ---
+      const viewAllBtn = document.getElementById("viewAllBtn");
+      const allReasonsModal = document.getElementById("allReasonsModal");
+      const closeModalBtn = document.getElementById("closeModalBtn");
+      const allReasonsList = document.getElementById("allReasonsList");
+
+      viewAllBtn.addEventListener("click", () => {
+        allReasonsList.innerHTML = "";
+        if (unlockedReasons.size === 0) {
+          allReasonsList.innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        <i class="fa-solid fa-lock text-3xl text-pink-500/50 mb-3 block"></i>
+                        <p class="text-base text-gray-300 font-medium">No reasons unlocked yet!</p>
+                        <p class="text-xs text-gray-500 mt-1">Click the jar or "Draw a Reason" to reveal them one by one.</p>
+                    </div>
+                `;
+        } else {
+          const sorted = Array.from(unlockedReasons).sort((a, b) => a - b);
+          sorted.forEach((idx) => {
+            const r = reasons[idx];
+            const div = document.createElement("div");
+            div.className =
+              "glass-panel p-4 rounded-xl border border-pink-500/15 flex items-center justify-between gap-4 hover:border-pink-500/40 transition-colors";
+            div.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-pink-500/20 text-pink-300 text-xs font-bold flex items-center justify-center shrink-0">#${idx + 1}</span>
+                            <span class="text-sm text-gray-200">${r}</span>
+                        </div>
+                        <button onclick="navigator.clipboard.writeText('${r.replace(/'/g, "\\'")}')" class="text-xs text-pink-400 hover:text-pink-300 px-3 py-1.5 rounded-lg bg-pink-500/10 shrink-0">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    `;
+            allReasonsList.appendChild(div);
+          });
+        }
+        allReasonsModal.classList.remove("hidden");
+      });
+
+      closeModalBtn.addEventListener("click", () =>
+        allReasonsModal.classList.add("hidden"),
+      );
+      allReasonsModal.addEventListener("click", (e) => {
+        if (e.target === allReasonsModal)
+          allReasonsModal.classList.add("hidden");
+      });
+
+      // --- Audio Player Logic (with Playlist) ---
+      const songs = [
+        "4u jaydes extended.mp3",
+        "frou frou - A New Kind Of Love.mp3",
+        "Heaven Sent.mp3",
+        "Hello.mp3",
+        "Hex.mp3",
+        "I Know You.mp3",
+        "Jane Remover — Beauty Sleep.mp3",
+        "Jane Remover — So What (audio).mp3",
+        "Joey Bada$$ - “Love Is Only A Feeling“ (Official Audio).mp3",
+        "Laufey - Valentine (Official Audio).mp3",
+        "Lil Peep - nuts (feat. rainy bear) (Official Audio).mp3",
+        "Lovers Rock.mp3",
+        "Pink Bubblegum lavi lyrics.mp3",
+        "Riovaz - I Wonder (Official Music Video).mp3",
+        "SAILORR - COCONUT (feat. Eem Triplin) (Official Music Video).mp3",
+        "Soulja Boy Tell'em - Kiss Me Thru The Phone ft. Sammie.mp3",
+        "underscores — The Peace.mp3",
+        "underscores — Wish U Well (♫).mp3",
+      ];
+
+      // Shuffle songs on load
+      for (let i = songs.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [songs[i], songs[j]] = [songs[j], songs[i]];
+      }
+
+      const bgAudio = document.getElementById("bgAudio");
+      const currentSongTitle = document.getElementById("currentSongTitle");
+      const musicToggleBtn = document.getElementById("musicToggleBtn");
+      const musicBtnText = document.getElementById("musicBtnText");
+      const floatingPlayBtn = document.getElementById("floatingPlayBtn");
+      const playIcon = document.getElementById("playIcon");
+      const prevSongBtn = document.getElementById("prevSongBtn");
+      const nextSongBtn = document.getElementById("nextSongBtn");
+      const playlistBtn = document.getElementById("playlistBtn");
+      const playlistModal = document.getElementById("playlistModal");
+      const closePlaylistBtn = document.getElementById("closePlaylistBtn");
+      const playlistList = document.getElementById("playlistList");
+      const playerStatus = document.getElementById("playerStatus");
+      const discSpinner = document.getElementById("discSpinner");
+      const volumeSlider = document.getElementById("volumeSlider");
+      const volumeIcon = document.getElementById("volumeIcon");
+
+      let currentSongIndex = 0;
+      let isPlaying = false;
+
+      function playSong() {
+        bgAudio.play().catch(() => {});
+        isPlaying = true;
+        playIcon.className = "fa-solid fa-pause text-xs";
+        musicBtnText.textContent = "Pause";
+        if (playerStatus) playerStatus.textContent = "Now Playing 🎵";
+        discSpinner.classList.add("spinning");
+      }
+
+      function pauseSong() {
+        bgAudio.pause();
+        isPlaying = false;
+        playIcon.className = "fa-solid fa-play text-xs";
+        musicBtnText.textContent = "Play";
+        if (playerStatus) playerStatus.textContent = "Paused — Tap to Play";
+        discSpinner.classList.remove("spinning");
+      }
+
+      function loadSong(index, autoPlay = false) {
+        currentSongIndex = index;
+        const songName = songs[index];
+        bgAudio.src = `music/${songName}`;
+        currentSongTitle.textContent = songName
+          .replace(".mp3", "")
+          .replace(" (Official Audio)", "")
+          .replace(" (Official Music Video)", "")
+          .replace(" (♫)", "");
+        if (autoPlay || isPlaying) {
+          playSong();
+        }
+      }
+
+      function toggleMusic() {
+        if (isPlaying) {
+          pauseSong();
+        } else {
+          playSong();
+        }
+      }
+
+      // Auto-unpause when skipping songs
+      prevSongBtn.addEventListener("click", () => {
+        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+        loadSong(currentSongIndex, true);
+      });
+
+      nextSongBtn.addEventListener("click", () => {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        loadSong(currentSongIndex, true);
+      });
+
+      bgAudio.addEventListener("ended", () => {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        loadSong(currentSongIndex, true);
+      });
+
+      musicToggleBtn.addEventListener("click", toggleMusic);
+      floatingPlayBtn.addEventListener("click", toggleMusic);
+
+      // Volume slider control
+      bgAudio.volume = 0.8;
+      if (volumeSlider) {
+        volumeSlider.addEventListener("input", (e) => {
+          const val = parseFloat(e.target.value);
+          bgAudio.volume = val;
+          if (volumeIcon) {
+            if (val === 0) {
+              volumeIcon.className =
+                "fa-solid fa-volume-xmark text-[11px] text-gray-400 w-3.5";
+            } else if (val < 0.5) {
+              volumeIcon.className =
+                "fa-solid fa-volume-low text-[11px] text-pink-300/80 w-3.5";
+            } else {
+              volumeIcon.className =
+                "fa-solid fa-volume-high text-[11px] text-pink-300/80 w-3.5";
+            }
+          }
+        });
+      }
+
+      // Initialize with first song ready
+      loadSong(0, false);
+
+      // Populate Playlist Modal (auto-plays selected song)
+      playlistBtn.addEventListener("click", () => {
+        playlistList.innerHTML = "";
+        songs.forEach((song, idx) => {
+          const div = document.createElement("div");
+          div.className =
+            "glass-panel p-3 rounded-lg border border-pink-500/15 flex items-center justify-between gap-3 cursor-pointer hover:border-pink-500/40";
+          div.innerHTML = `<span class="text-xs text-gray-200 truncate">${song.replace(".mp3", "")}</span>`;
+          div.onclick = () => {
+            loadSong(idx, true);
+            playlistModal.classList.add("hidden");
+          };
+          playlistList.appendChild(div);
+        });
+        playlistModal.classList.remove("hidden");
+      });
+
+      closePlaylistBtn.addEventListener("click", () =>
+        playlistModal.classList.add("hidden"),
+      );
+      playlistModal.addEventListener("click", (e) => {
+        if (e.target === playlistModal) playlistModal.classList.add("hidden");
+      });
+
+      // --- Draggable Music Player Widget ---
+      const musicPlayerWidget = document.getElementById("musicPlayerWidget");
+      if (musicPlayerWidget) {
+        let isDragging = false;
+        let startX, startY, startLeft, startTop;
+
+        function onPointerDown(e) {
+          if (e.target.closest("button") || e.target.closest("input")) return;
+          isDragging = true;
+          musicPlayerWidget.style.cursor = "grabbing";
+
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+          const rect = musicPlayerWidget.getBoundingClientRect();
+          startX = clientX;
+          startY = clientY;
+          startLeft = rect.left;
+          startTop = rect.top;
+
+          musicPlayerWidget.style.bottom = "auto";
+          musicPlayerWidget.style.right = "auto";
+          musicPlayerWidget.style.left = `${startLeft}px`;
+          musicPlayerWidget.style.top = `${startTop}px`;
+
+          window.addEventListener("mousemove", onPointerMove);
+          window.addEventListener("mouseup", onPointerUp);
+          window.addEventListener("touchmove", onPointerMove, {
+            passive: false,
+          });
+          window.addEventListener("touchend", onPointerUp);
+        }
+
+        function onPointerMove(e) {
+          if (!isDragging) return;
+          if (e.cancelable && e.touches) {
+            e.preventDefault();
+          }
+
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+          const deltaX = clientX - startX;
+          const deltaY = clientY - startY;
+
+          let newLeft = startLeft + deltaX;
+          let newTop = startTop + deltaY;
+
+          const pad = 12;
+          const maxLeft =
+            window.innerWidth - musicPlayerWidget.offsetWidth - pad;
+          const maxTop =
+            window.innerHeight - musicPlayerWidget.offsetHeight - pad;
+
+          newLeft = Math.max(pad, Math.min(newLeft, maxLeft));
+          newTop = Math.max(pad, Math.min(newTop, maxTop));
+
+          musicPlayerWidget.style.left = `${newLeft}px`;
+          musicPlayerWidget.style.top = `${newTop}px`;
+        }
+
+        function onPointerUp() {
+          if (!isDragging) return;
+          isDragging = false;
+          musicPlayerWidget.style.cursor = "grab";
+          window.removeEventListener("mousemove", onPointerMove);
+          window.removeEventListener("mouseup", onPointerUp);
+          window.removeEventListener("touchmove", onPointerMove);
+          window.removeEventListener("touchend", onPointerUp);
+        }
+
+        musicPlayerWidget.addEventListener("mousedown", onPointerDown);
+        musicPlayerWidget.addEventListener("touchstart", onPointerDown, {
+          passive: true,
+        });
+
+        window.addEventListener("resize", () => {
+          if (
+            musicPlayerWidget.style.left &&
+            musicPlayerWidget.style.top !== "auto"
+          ) {
+            const pad = 12;
+            const rect = musicPlayerWidget.getBoundingClientRect();
+            const maxLeft = window.innerWidth - rect.width - pad;
+            const maxTop = window.innerHeight - rect.height - pad;
+            let curLeft = parseFloat(musicPlayerWidget.style.left);
+            let curTop = parseFloat(musicPlayerWidget.style.top);
+            curLeft = Math.max(pad, Math.min(curLeft, maxLeft));
+            curTop = Math.max(pad, Math.min(curTop, maxTop));
+            musicPlayerWidget.style.left = `${curLeft}px`;
+            musicPlayerWidget.style.top = `${curTop}px`;
+          }
+        });
+      }
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      mobileMenuBtn.addEventListener("click", () =>
+        mobileMenu.classList.toggle("hidden"),
+      );
+      document
+        .querySelectorAll(".mobile-link")
+        .forEach((l) =>
+          l.addEventListener("click", () => mobileMenu.classList.add("hidden")),
+        );
+
+      // ====================================================
+      //  CANVAS BACKGROUND — Minimal Blended Tulips + Petals
+      // ====================================================
+      const bgCanvas = document.getElementById("bgCanvas");
+      const bgCtx = bgCanvas.getContext("2d");
+      let W = (bgCanvas.width = window.innerWidth);
+      let H = (bgCanvas.height = window.innerHeight);
+      window.addEventListener("resize", () => {
+        W = bgCanvas.width = window.innerWidth;
+        H = bgCanvas.height = window.innerHeight;
+      });
+
+      // --- Draw a single tulip silhouette ---
+      function drawTulip(ctx, x, y, scale, alpha, hue) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(scale, scale);
+        ctx.globalAlpha = alpha;
+
+        // Stem
+        ctx.strokeStyle = `hsla(${hue - 30}, 40%, 35%, 0.8)`;
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(-4, -30, 0, -60);
+        ctx.stroke();
+
+        // Left leaf
+        ctx.fillStyle = `hsla(${hue - 30}, 40%, 35%, 0.6)`;
+        ctx.beginPath();
+        ctx.moveTo(-2, -20);
+        ctx.quadraticCurveTo(-18, -30, -12, -45);
+        ctx.quadraticCurveTo(-5, -35, -2, -30);
+        ctx.fill();
+
+        // Tulip head — three overlapping petals
+        const petalColor = `hsla(${hue}, 65%, 60%, 1.0)`;
+        const petalHighlight = `hsla(${hue}, 75%, 75%, 0.9)`;
+
+        // Center petal
+        ctx.fillStyle = petalColor;
+        ctx.beginPath();
+        ctx.ellipse(0, -72, 8, 16, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Left petal
+        ctx.fillStyle = petalHighlight;
+        ctx.beginPath();
+        ctx.ellipse(-6, -68, 7, 14, -0.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Right petal
+        ctx.fillStyle = petalHighlight;
+        ctx.beginPath();
+        ctx.ellipse(6, -68, 7, 14, 0.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      // Generate static tulip positions (sparse & minimal)
+      const tulips = [];
+      const tulipCount = Math.max(8, Math.floor(W / 120));
+      for (let i = 0; i < tulipCount; i++) {
+        tulips.push({
+          x: Math.random() * W,
+          baseY: H * 0.7 + Math.random() * H * 0.3,
+          scale: 0.6 + Math.random() * 0.8,
+          alpha: 0.35 + Math.random() * 0.25,
+          hue: 330 + Math.random() * 30, // pink range
+          swayOffset: Math.random() * Math.PI * 2,
+          swaySpeed: 0.3 + Math.random() * 0.4,
+        });
+      }
+
+      // Falling petals
+      const petals = Array.from({ length: 18 }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        size: Math.random() * 5 + 3,
+        speedY: Math.random() * 0.6 + 0.3,
+        speedX: (Math.random() - 0.5) * 0.4,
+        rotation: Math.random() * 360,
+        rotSpeed: Math.random() * 1.5 - 0.75,
+        hue: 330 + Math.random() * 30,
+        opacity: Math.random() * 0.18 + 0.06,
+      }));
+
+      let frameTime = 0;
+      function drawBackground(timestamp) {
+        frameTime = timestamp * 0.001;
+        bgCtx.clearRect(0, 0, W, H);
+
+        // Draw tulips with gentle sway
+        tulips.forEach((t) => {
+          const sway =
+            Math.sin(frameTime * t.swaySpeed + t.swayOffset) * 4 * t.scale;
+          drawTulip(bgCtx, t.x + sway, t.baseY, t.scale, t.alpha, t.hue);
+        });
+
+        // Draw falling petals
+        petals.forEach((p) => {
+          p.y += p.speedY;
+          p.x += p.speedX + Math.sin(p.y * 0.008 + frameTime) * 0.3;
+          p.rotation += p.rotSpeed;
+          if (p.y > H + 20) {
+            p.y = -20;
+            p.x = Math.random() * W;
+          }
+
+          bgCtx.save();
+          bgCtx.translate(p.x, p.y);
+          bgCtx.rotate((p.rotation * Math.PI) / 180);
+          bgCtx.globalAlpha = p.opacity;
+          bgCtx.fillStyle = `hsl(${p.hue}, 60%, 55%)`;
+          bgCtx.beginPath();
+          bgCtx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, Math.PI * 2);
+          bgCtx.fill();
+          bgCtx.restore();
+        });
+
+        requestAnimationFrame(drawBackground);
+      }
+      requestAnimationFrame(drawBackground);
+
+      // ====================================================
+      //  CURSOR SPARKLES
+      // ====================================================
+      const cursorCanvas = document.getElementById("cursorCanvas");
+      const cursorCtx = cursorCanvas.getContext("2d");
+      let cW = (cursorCanvas.width = W);
+      let cH = (cursorCanvas.height = H);
+      window.addEventListener("resize", () => {
+        cW = cursorCanvas.width = window.innerWidth;
+        cH = cursorCanvas.height = window.innerHeight;
+      });
+
+      const cursorParticles = [];
+      window.addEventListener("mousemove", (e) => {
+        for (let i = 0; i < 2; i++) {
+          cursorParticles.push({
+            x: e.clientX,
+            y: e.clientY,
+            size: Math.random() * 5 + 1.5,
+            speedX: (Math.random() - 0.5) * 2,
+            speedY: (Math.random() - 0.5) * 2,
+            life: 1,
+            color: Math.random() > 0.5 ? "#f472b6" : "#ec4899",
+          });
+        }
+      });
+
+      function animateCursor() {
+        cursorCtx.clearRect(0, 0, cW, cH);
+        for (let i = cursorParticles.length - 1; i >= 0; i--) {
+          const p = cursorParticles[i];
+          p.x += p.speedX;
+          p.y += p.speedY;
+          p.life -= 0.03;
+          if (p.life <= 0) {
+            cursorParticles.splice(i, 1);
+            continue;
+          }
+          cursorCtx.save();
+          cursorCtx.globalAlpha = p.life;
+          cursorCtx.fillStyle = p.color;
+          cursorCtx.beginPath();
+          cursorCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          cursorCtx.fill();
+          cursorCtx.restore();
+        }
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+    </script>
+  </body>
+</html>
